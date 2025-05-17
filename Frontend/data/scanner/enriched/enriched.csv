@@ -1,0 +1,2 @@
+ip,port,hostname,organization,country,banner
+"35.182.91.45","22","ec2-35-182-91-45.ca-central-1.compute.amazonaws.com","Amazon Technologies Inc.","Canada","SSH-2.0-OpenSSH_7.4"
