@@ -1,0 +1,253 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Custom colors */
+    --neon-green: 128, 255, 65;
+    --neon-blue: 0, 200, 255;
+    --neon-pink: 255, 0, 255;
+    --neon-red: 255, 62, 62;
+    --neon-yellow: 255, 191, 0;
+    --dark-primary: 10, 25, 41;
+    --dark-secondary: 26, 26, 26;
+    --dark-tertiary: 42, 42, 42;
+    
+    /* Base colors */
+    --background: var(--dark-primary);
+    --foreground: 255, 255, 255;
+    
+    --card: var(--dark-secondary);
+    --card-foreground: 255, 255, 255;
+    
+    --popover: var(--dark-secondary);
+    --popover-foreground: 255, 255, 255;
+    
+    --primary: var(--neon-green);
+    --primary-foreground: var(--dark-primary);
+    
+    --secondary: var(--dark-tertiary);
+    --secondary-foreground: 255, 255, 255;
+    
+    --muted: var(--dark-tertiary);
+    --muted-foreground: 160, 160, 160;
+    
+    --accent: var(--neon-green);
+    --accent-foreground: var(--dark-primary);
+    
+    --destructive: var(--neon-red);
+    --destructive-foreground: 255, 255, 255;
+    
+    --border: 42, 42, 42;
+    --input: var(--dark-tertiary);
+    --ring: var(--neon-green);
+    
+    --radius: 0.5rem;
+  }
+  
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    font-family: 'JetBrains Mono', monospace;
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+@layer components {
+  .scanline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: rgba(0, 255, 65, 0.2);
+    pointer-events: none;
+    animation: scanline 5s linear infinite;
+  }
+  
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .scrollbar-custom::-webkit-scrollbar-track {
+    background: #0a1929;
+  }
+  
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    background: #00ff41;
+    border-radius: 4px;
+  }
+  
+  .scrollbar-custom::-webkit-scrollbar-thumb:hover {
+    background: #00c800;
+  }
+  
+  .shodan-card {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .shodan-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      45deg,
+      rgba(0, 255, 65, 0.1) 0%,
+      rgba(0, 0, 0, 0) 70%
+    );
+    pointer-events: none;
+  }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes glitch {
+  0%, 100% {
+    transform: translate(0);
+  }
+  25% {
+    transform: translate(1px, 1px);
+  }
+  50% {
+    transform: translate(-1px, -1px);
+  }
+  75% {
+    transform: translate(-1px, 1px);
+  }
+}
+
+@keyframes flipIn {
+  0% {
+    opacity: 0;
+    transform: perspective(400px) rotateX(-90deg);
+    transform-origin: top;
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(400px) rotateX(0deg);
+    transform-origin: top;
+  }
+}
+
+@keyframes popOut {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+@keyframes fadeInPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Cracked page specific styles */
+.cracked-box {
+  position: relative;
+  width: 100%;
+  max-width: 800px; /* Long box */
+  margin: 0 auto; /* Center the box */
+  background: rgba(26, 26, 26, 0.9); /* Matches --dark-secondary */
+  border: 2px solid rgba(0, 255, 65, 0.5); /* Neon green border */
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+  overflow: hidden;
+}
+
+.cracked-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(0, 255, 65, 0.2);
+  animation: scanline 3s infinite linear; /* Use existing scanline animation */
+}
+
+.cracked-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cracked-header span {
+  font-size: 0.875rem; /* Match text-sm */
+  font-weight: 500; /* Match font-medium */
+  color: #00ff41; /* Neon green */
+  text-shadow: 0 0 5px rgba(0, 255, 65, 0.5);
+}
